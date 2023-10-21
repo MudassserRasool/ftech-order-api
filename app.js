@@ -46,6 +46,7 @@
 // server.js
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -55,6 +56,11 @@ mongoose.connect('mongodb://mern2022:mern2022@ac-1vocr4t-shard-00-00.43aaypx.mon
   useUnifiedTopology: true,
 });
 
+// Configure CORS to allow requests from your frontend origin
+app.use(cors({
+  origin: 'http://localhost:3000', // Update with the actual origin of your frontend
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+}));
 // Create a schema and model for the order data
 const orderSchema = new mongoose.Schema({
   items: [{ name: String, quantity: Number, price: Number }],
@@ -64,7 +70,7 @@ const orderSchema = new mongoose.Schema({
 const Order = mongoose.model('Order', orderSchema);
 
 // Define API routes
-app.get('/api/orders', async (req, res) => {
+app.get('https://fetch-order-api.vercel.app/api/orders', async (req, res) => {
   try {
     // Fetch orders from the database
     const orders = await Order.find();
