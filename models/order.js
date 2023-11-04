@@ -10,6 +10,7 @@ const orderSchema = new mongoose.Schema({
   ],
   totalPrice: Number,
   orderDate: { type: Date, default: Date.now },
+  address: String,
 });
 
 const Order = mongoose.model('Order', orderSchema);
