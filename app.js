@@ -1,14 +1,18 @@
-
-
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const http = require('http'); // Import the http module
-const socketIo = require('socket.io'); // Import socket.io
+// const express = require('express');
+// const mongoose = require('mongoose');
+// const cors = require('cors');
+// const http = require('http'); // Import the http module
+// const socketIo = require('socket.io'); // Import socket.io
+import cors from 'cors';
+import express from 'express';
+import http from 'http';
+import mongoose from 'mongoose';
+// import socketIo from 'socket.io';
+import { Server } from 'socket.io';
 
 const app = express();
 const server = http.createServer(app); // Create an HTTP server
-const io = socketIo(server); // Attach socket.io to the server
+const io = new Server(server); // Attach socket.io to the server
 const port = process.env.PORT || 3000;
 
 // Connect to your MongoDB database
