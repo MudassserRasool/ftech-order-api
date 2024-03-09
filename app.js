@@ -35,8 +35,6 @@ const orderSchema = new mongoose.Schema({
 
 const Order = mongoose.model('Order', orderSchema);
 
-// Define API routes
-
 // Route to retrieve all orders
 app.get('/api/orders', async (req, res) => {
   try {
@@ -48,18 +46,6 @@ app.get('/api/orders', async (req, res) => {
   }
 });
 
-// Route to delete an order by ID
-app.delete('/api/orders/:orderId', async (req, res) => {
-  try {
-    const { orderId } = req.params;
-    await Order.findByIdAndRemove(orderId);
-    res.json({ message: 'Order deleted successfully' });
-  } catch (error) {
-    res.status(500).json({ error: 'Error deleting order' });
-  }
-});
-
-// WebSocket server code
 io.on('connection', (socket) => {
   console.log('A user connected');
   socket.on('disconnect', () => {
